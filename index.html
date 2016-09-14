@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="js/SegmentDisplay/segment-display.js"></script>
+  <script type='text/javascript'>
+    var dateOfLastEvent = new Date("08/26/2016");
+    var today = new Date();
+    var daysSinceLastEvent = Math.trunc((today - dateOfLastEvent) / 86400000);
+    var dayCounter;
+
+    function pad(value, length) {
+        return (value.toString().length < length) ? pad("0" + value, length) : value.toString();
+    }
+
+    function init() {
+      dayCounter = new SegmentDisplay("dayCounter");
+      dayCounter.pattern = "###";
+      dayCounter.displayAngle = 6;
+      dayCounter.digitHeight = 20;
+      dayCounter.digitWidth = 14;
+      dayCounter.digitDistance = 2.5;
+      dayCounter.segmentWidth = 2;
+      dayCounter.segmentDistance = 0.3;
+      dayCounter.segmentCount = 7;
+      dayCounter.cornerType = 3;
+      dayCounter.colorOff = "#F8F8F8";
+      dayCounter.colorOn = "#2A4747";
+      dayCounter.draw();
+
+      dayCounter.setValue(pad((daysSinceLastEvent).toString(), 3));
+    }
+  </script>
+</head>
+
+<body onload="init()" text-align="center">
+<h1 align="center">Days since last event</h1>
+<div id="dayDiv" class="box-invisible" style="width:320 position: relative">
+    <canvas id="dayCounter" style="width:320; height: 270; position: absolute; left: 50%; transform: translateX(-50%);"></canvas>
+</div>
+<!-- <h2 id="DaysSinceLastEvent" /> -->
+
+</body>
+</html>
